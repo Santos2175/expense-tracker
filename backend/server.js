@@ -4,6 +4,7 @@ const cors = require('cors');
 const path = require('path');
 
 const connectToMongoDB = require('./config/db');
+const authRoutes = require('./routes/auth.routes');
 
 // PORT initialization
 const PORT = process.env.PORT || 5000;
@@ -21,6 +22,9 @@ app.use(
 );
 
 app.use(express.json());
+
+// API route
+app.use('/api/v1/auth', authRoutes);
 
 app.listen(PORT, () => {
   connectToMongoDB();
