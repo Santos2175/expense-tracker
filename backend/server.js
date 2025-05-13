@@ -3,6 +3,8 @@ const express = require('express');
 const cors = require('cors');
 const path = require('path');
 
+const connectToMongoDB = require('./config/db');
+
 // PORT initialization
 const PORT = process.env.PORT || 5000;
 
@@ -21,5 +23,6 @@ app.use(
 app.use(express.json());
 
 app.listen(PORT, () => {
+  connectToMongoDB();
   console.log(`Server started at PORT ${PORT}`);
 });
