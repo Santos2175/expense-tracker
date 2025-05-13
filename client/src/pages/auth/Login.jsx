@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import AuthLayout from '../../components/layouts/AuthLayout';
+import { useState } from 'react';
+import AuthLayout from '@/components/layouts/AuthLayout';
 import Input from '@/components/ui/Input';
 import { Link, useNavigate } from 'react-router';
 import { validateEmail } from '@/utils/helper';
