@@ -14,7 +14,7 @@ const router = Router();
 // API routes for income
 router.post('/add', authenticate, addIncome);
 router.get('/get', authenticate, getAllIncome);
-router.get('/downloadExcel', authenticate, downloadIncomeExcel);
+router.get('/download-excel', authenticate, downloadIncomeExcel);
 router.delete('/:id', authenticate, deleteIncome);
 
 module.exports = router;
