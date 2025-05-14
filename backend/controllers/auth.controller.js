@@ -20,7 +20,7 @@ const registerUser = async (req, res) => {
     if (existingUser) {
       return res
         .status(400)
-        .json({ success: false, error: `Email already in use` });
+        .json({ success: false, message: `Email already in use` });
     }
 
     // Create the user
@@ -46,7 +46,40 @@ const registerUser = async (req, res) => {
 };
 
 // Handler to login user
-const loginUser = async (req, res) => {};
+const loginUser = async (req, res) => {
+  const { email, password } = req.body;
+
+  // Validate input
+  if (!email || !password) {
+    return res.status(400).json({
+      success: false,
+      message: 'All fields are required: email, password',
+    });
+  }
+
+  try {
+    // check credentials
+    const user = await User.findOne({ email });
+
+    if (!user || !(await user.comparePassword(password))) {
+      return res
+        .status(400)
+        .json({ success: false, message: `Invalid Credentials` });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: `User logged in successfully`,
+      data: {
+        id: user._id,
+        user,
+        token: generateToken(user._id),
+      },
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
 
 // Handler to get the user info
 const getUserInfo = async (req, res) => {};

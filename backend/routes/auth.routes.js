@@ -10,7 +10,7 @@ const router = Router();
 
 // Auth API routes
 router.post('/register', registerUser);
-// router.post('/login', loginUser);
+router.post('/login', loginUser);
 // router.get('/getUser', getUserInfo);
 
 module.exports = router;
