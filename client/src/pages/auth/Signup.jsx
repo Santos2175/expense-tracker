@@ -6,7 +6,7 @@ import { Link, useNavigate } from 'react-router';
 import { validateEmail } from '@/utils/helper';
 import axiosInstance from '../../api/axiosInstance';
 import { API_PATHS } from '../../api/config';
-import { useUser } from '../../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import uploadImage from '../../api/uploadImage';
 
 const SignUp = () => {
@@ -16,7 +16,7 @@ const SignUp = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
 
-  const { updateUser } = useUser();
+  const { updateUser } = useUserContext();
 
   const navigate = useNavigate();
 

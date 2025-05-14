@@ -24,7 +24,7 @@ export const UserProvider = ({ children }) => {
 };
 
 // Use of context
-export const useUser = () => {
+export const useUserContext = () => {
   const context = useContext(UserContext);
 
   if (context === undefined) {

@@ -1,9 +1,9 @@
-import { useUser } from '../../context/UserContext';
+import { useUserContext } from '../../context/UserContext';
 import Navbar from './Navbar';
 import SideMenu from './SideMenu';
 
 const DashboardLayout = ({ children, activeMenu }) => {
-  const { user } = useUser();
+  const { user } = useUserContext();
 
   return (
     <div className=''>

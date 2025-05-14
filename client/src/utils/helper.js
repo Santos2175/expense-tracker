@@ -3,3 +3,17 @@ export const validateEmail = (email) => {
 
   return regex.test(email);
 };
+
+// Function to the initials of names
+export const getInitials = (name) => {
+  if (!name) return;
+
+  let initials = '';
+  let words = name.split(' ');
+
+  for (let i = 0; i < Math.min(words.length, 2); i++) {
+    initials += words[i][0];
+  }
+
+  return initials;
+};
