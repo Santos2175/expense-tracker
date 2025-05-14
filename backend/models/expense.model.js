@@ -24,7 +24,7 @@ const expenseSchema = new mongoose.Schema(
       default: Date.now,
     },
   },
-  { timestamps }
+  { timestamps: true }
 );
 
 const Expense = mongoose.model('Expense', expenseSchema);

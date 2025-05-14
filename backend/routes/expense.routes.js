@@ -17,4 +17,4 @@ router.get('/get', authenticate, getAllExpense);
 router.delete('/:id', authenticate, deleteExpense);
 router.get('/download-excel', authenticate, downloadExpenseExcel);
 
-router.module.exports = router;
+module.exports = router;
