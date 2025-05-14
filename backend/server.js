@@ -26,6 +26,9 @@ app.use(express.json());
 // API route
 app.use('/api/v1/auth', authRoutes);
 
+// Serve uploads folder
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
 app.listen(PORT, () => {
   connectToMongoDB();
   console.log(`Server started at PORT ${PORT}`);
