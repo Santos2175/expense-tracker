@@ -6,6 +6,7 @@ const path = require('path');
 const connectToMongoDB = require('./config/db');
 const authRoutes = require('./routes/auth.routes');
 const incomeRoutes = require('./routes/income.routes');
+const expenseRoutes = require('./routes/expense.routes');
 
 // PORT initialization
 const PORT = process.env.PORT || 5000;
@@ -27,6 +28,7 @@ app.use(express.json());
 // API route
 app.use('/api/v1/auth', authRoutes);
 app.use('/api/v1/income', incomeRoutes);
+app.use('/api/v1/expense', expenseRoutes);
 
 // Serve uploads folder
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
