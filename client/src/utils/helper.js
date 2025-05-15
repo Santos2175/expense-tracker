@@ -1,3 +1,6 @@
+import { format } from 'date-fns';
+import { enUS } from 'date-fns/locale';
+
 export const validateEmail = (email) => {
   const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
@@ -34,7 +37,22 @@ export const addThousandsSeparator = (num) => {
 export const prepareExpenseBarChartData = (data = []) => {
   const chartData = data.map((item) => ({
     category: item?.category,
-    amount: item.amount,
+    amount: item?.amount,
+  }));
+
+  return chartData;
+};
+
+// utility function to prepare Income bar chart data
+export const prepareIncomeBarChartData = (data = []) => {
+  const sortedData = [...data].sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
+
+  const chartData = sortedData.map((item) => ({
+    month: format(item?.date, 'do MMM', { locale: enUS }),
+    source: item?.source,
+    amount: item?.amount,
   }));
 
   return chartData;
