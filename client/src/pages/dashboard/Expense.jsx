@@ -7,6 +7,8 @@ import { toast } from 'react-hot-toast';
 import ExpenseOverview from '../../components/expense/ExpenseOverview';
 import Modal from '../../components/modal/Modal';
 import AddExpenseForm from '../../components/expense/AddExpenseForm';
+import ExpenseList from '../../components/expense/ExpenseList';
+import DeleteAlert from '../../components/ui/DeleteAlert';
 
 const Expense = () => {
   useUserAuth();
@@ -117,13 +119,31 @@ const Expense = () => {
               onAddExpense={() => setOpenAddExpenseModal(true)}
             />
           </div>
+
+          <ExpenseList
+            transactions={expenseData}
+            onDelete={(id) => setOpenDeleteAlert({ show: true, data: id })}
+            onDownload={handleDownloadExpenseDetails}
+          />
         </div>
 
+        {/* Expense add modal */}
         <Modal
           isOpen={openAddExpenseModal}
           onClose={() => setOpenAddExpenseModal(false)}
           title='Add Expense'>
           <AddExpenseForm onAddExpense={handleAddExpense} />
+        </Modal>
+
+        {/* Expense delete modal */}
+        <Modal
+          isOpen={openDeleteAlert.show}
+          onClose={() => setOpenDeleteAlert({ show: false, data: null })}
+          title='Delete Expense'>
+          <DeleteAlert
+            content='Are you sure you want to delete this expense detail?'
+            onDelete={() => handleDeleteExpense(openDeleteAlert.data)}
+          />
         </Modal>
       </div>
     </DashboardLayout>

@@ -17,7 +17,7 @@ export const API_PATHS = {
   },
   EXPENSE: {
     ADD_EXPENSE: '/api/v1/expense/add',
-    DELETE_EXPENSE: (expenseId) => `/api/v1/income/${expenseId}`,
+    DELETE_EXPENSE: (expenseId) => `/api/v1/expense/${expenseId}`,
     GET_ALL_EXPENSE: '/api/v1/expense/get',
     DOWNLOAD_INCOME: '/api/v1/expense/download-excel',
   },
