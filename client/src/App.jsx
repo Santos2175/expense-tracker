@@ -1,6 +1,6 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router';
 import Login from './pages/auth/Login';
-import SignUp from './pages/auth/SignUp.jsx';
+import SignUp from './pages/auth/SignUp';
 import Home from './pages/dashboard/Home';
 import Income from './pages/dashboard/Income';
 import Expense from './pages/dashboard/Expense';
