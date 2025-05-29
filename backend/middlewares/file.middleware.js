@@ -1,23 +1,25 @@
 const multer = require('multer');
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 
 // Configure storage
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Check if file exists, if not create it
-    const uploadDir = path.join(__dirname, '../uploads');
+// const storage = multer.diskStorage({
+//   destination: (req, file, cb) => {
+//     // Check if file exists, if not create it
+//     const uploadDir = path.join(__dirname, '../uploads');
 
-    if (!fs.existsSync(uploadDir)) {
-      fs.mkdirSync(uploadDir, { recursive: true });
-    }
+//     if (!fs.existsSync(uploadDir)) {
+//       fs.mkdirSync(uploadDir, { recursive: true });
+//     }
 
-    cb(null, 'uploads/');
-  },
-  filename: (req, file, cb) => {
-    cb(null, `${Date.now()}-${file.originalname}`);
-  },
-});
+//     cb(null, 'uploads/');
+//   },
+//   filename: (req, file, cb) => {
+//     cb(null, `${Date.now()}-${file.originalname}`);
+//   },
+// });
+
+const storage = multer.memoryStorage();
 
 // File filter
 const fileFilter = (req, file, cb) => {

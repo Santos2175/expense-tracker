@@ -1,5 +1,6 @@
 const User = require('../models/user.model');
 const { generateToken } = require('../utils/token');
+const cloudinary = require('../config/cloudinary.config');
 
 // Handler to register user
 const registerUser = async (req, res) => {
@@ -98,7 +99,8 @@ const getUserInfo = async (req, res) => {
   }
 };
 
-const uploadProfileImage = (req, res) => {
+// Handler to upload image
+const uploadProfileImage = async (req, res) => {
   try {
     if (!req.file) {
       return res
@@ -106,11 +108,24 @@ const uploadProfileImage = (req, res) => {
         .json({ success: false, message: 'No file uploaded' });
     }
 
-    const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${
-      req.file.filename
-    }`;
+    // const imageUrl = `${req.protocol}://${req.get('host')}/uploads/${
+    //   req.file.filename
+    // }`;
 
-    res.status(200).json({ success: true, imageUrl });
+    // Get imageURL from cloudinary
+    const result = await new Promise((resolve, reject) => {
+      cloudinary.uploader
+        .upload_stream(
+          { folder: 'expense-tracker/', resource_type: 'image' },
+          (error, result) => {
+            if (error) reject(error);
+            else resolve(result);
+          }
+        )
+        .end(req.file.buffer);
+    });
+
+    res.status(200).json({ success: true, imageUrl: result.secure_url });
   } catch (error) {
     res.status(500).json({ success: false, error: error.message });
   }
