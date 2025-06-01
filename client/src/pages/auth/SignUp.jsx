@@ -15,12 +15,14 @@ const SignUp = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(false);
 
   const { updateUser } = useUserContext();
 
   const navigate = useNavigate();
 
   const handleSignUp = async (e) => {
+    if (isLoading) return;
     e.preventDefault();
 
     let profileImageUrl = '';
@@ -41,6 +43,7 @@ const SignUp = () => {
     }
 
     setError('');
+    setIsLoading(true);
 
     // api call to sign up
     try {
@@ -70,6 +73,8 @@ const SignUp = () => {
       } else {
         setError('Something went wrong. Please try again');
       }
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -112,8 +117,13 @@ const SignUp = () => {
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-          <button type='submit' className='btn-primary'>
-            SIGNUP
+          <button
+            type='submit'
+            className={`btn-primary ${
+              isLoading ? 'bg-purple-600/15 text-purple-600' : ''
+            }`}
+            disabled={isLoading}>
+            {isLoading ? 'SIGNING UP...' : 'SIGNUP'}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>

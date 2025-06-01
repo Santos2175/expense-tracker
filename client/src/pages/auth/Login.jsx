@@ -12,10 +12,13 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState(null);
   const { updateUser } = useUserContext();
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
+    if (isLoading) return;
+
     e.preventDefault();
 
     if (!validateEmail(email)) {
@@ -29,6 +32,7 @@ const Login = () => {
     }
 
     setError('');
+    setIsLoading(true);
 
     // login api call
     try {
@@ -50,6 +54,8 @@ const Login = () => {
       } else {
         setError(`Something went wrong. Please try again.`);
       }
+    } finally {
+      setIsLoading(false);
     }
   };
   return (
@@ -79,8 +85,13 @@ const Login = () => {
 
           {error && <p className='text-red-500 text-xs pb-2.5'>{error}</p>}
 
-          <button type='submit' className='btn-primary'>
-            LOGIN
+          <button
+            type='submit'
+            className={`btn-primary ${
+              isLoading ? 'bg-purple-600/15 text-purple-600' : ''
+            }`}
+            disabled={isLoading}>
+            {isLoading ? 'LOGGING IN' : 'LOGIN'}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
