@@ -32,8 +32,14 @@ app.use('/api/v1/income', incomeRoutes);
 app.use('/api/v1/expense', expenseRoutes);
 app.use('/api/v1/dashboard', dashboardRoutes);
 
+// Not required for main app
+// Purpose: Only to ping server from cron job app to prevent cold start in hosting service render.com
+app.use('/ping', (req, res) => {
+  res.status(200).json({ success: true, message: 'Server awake' });
+});
+
 // Serve uploads folder
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 app.listen(PORT, () => {
   connectToMongoDB();
