@@ -88,10 +88,12 @@ const Login = () => {
           <button
             type='submit'
             className={`btn-primary ${
-              isLoading ? 'bg-purple-600/15 text-purple-600' : ''
-            }`}
+              isLoading
+                ? 'bg-purple-600/15 text-purple-600'
+                : 'text-white bg-purple-600 '
+            } `}
             disabled={isLoading}>
-            {isLoading ? 'LOGGING IN' : 'LOGIN'}
+            {isLoading ? 'LOGGING IN...' : 'LOGIN'}
           </button>
 
           <p className='text-[13px] text-slate-800 mt-3'>
