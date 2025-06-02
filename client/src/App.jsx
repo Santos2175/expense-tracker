@@ -10,7 +10,7 @@ import { Toaster } from 'react-hot-toast';
 function App() {
   return (
     <UserProvider>
-      <div className='container mx-auto'>
+      <div className='max-w-[1440px] mx-auto'>
         <Router>
           <Routes>
             <Route path='/' element={<Root />} />
